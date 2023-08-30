@@ -78,52 +78,53 @@ public class SnakesAndLadders {
 	public static void main(String[] args) {
 		System.out.println("Snakes & Ladders");
 		
-		// Scanner for user input
-		Scanner sc = new Scanner(System.in);
+		try (
+			// Scanner for user input
+			Scanner sc = new Scanner(System.in)) {
+			// boolean for the while loop 
+			boolean bool_play = true;	
+			
+			// player's space on board
+			Integer int_space = 1;
+			
+			// count the number of turns the user takes
+			Integer int_turns = 0;
 
-		// boolean for the while loop 
-		boolean bool_play = true;	
-		
-		// player's space on board
-		Integer int_space = 1;
-		
-		// count the number of turns the user takes
-		Integer int_turns = 0;
-	
-		// code loop
-		while (bool_play) {
-			// gets user input
-			char[] chara_input = sc.nextLine().toCharArray();
-			
-			// checks if user has entered the exit loop
-			if (chara_input.length == 1 && chara_input[0] == 'q') {					
-				// sets to false to end loop
-				return;
-			}
+			// code loop
+			while (bool_play) {
+				// gets user input
+				char[] chara_input = sc.nextLine().toCharArray();
+				
+				// checks if user has entered the exit loop
+				if (chara_input.length == 1 && chara_input[0] == 'q') {					
+					// sets to false to end loop
+					return;
+				}
 
-			// play 1 turn
-			int_space = Turn(int_space);
-			
-			// check if player has won
-			if (CheckWin(int_space)) {
-				bool_play = false;
+				// play 1 turn
+				int_space = Turn(int_space);
+				
+				// check if player has won
+				if (CheckWin(int_space)) {
+					bool_play = false;
+				}
+				
+				// check if the player has gone over the goal
+				int_space = CheckOverGoal(int_space);
+				
+				// check if there is a snake or ladder on the current space
+				int_space = CheckMovement(int_space);
+				
+				int_turns++;
+				
+				
 			}
 			
-			// check if the player has gone over the goal
-			int_space = CheckOverGoal(int_space);
+			// converts 'turns' to string
+			String str_turns = int_turns.toString();
 			
-			// check if there is a snake or ladder on the current space
-			int_space = CheckMovement(int_space);
-			
-			int_turns++;
-			
-			
+			// prints you win message
+			System.out.println("You win!!!\nIt took " + str_turns + " turns!");
 		}
-		
-		// converts 'turns' to string
-		String str_turns = int_turns.toString();
-		
-		// prints you win message
-		System.out.println("You win!!!\nIt took " + str_turns + " turns!");
 	}
 }
