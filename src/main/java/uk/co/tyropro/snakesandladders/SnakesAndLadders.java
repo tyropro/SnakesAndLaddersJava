@@ -36,12 +36,6 @@ public class SnakesAndLadders {
         return space; // returns new space
     }
 	
-	// check if player has won
-	static boolean CheckWin(int int_space) {
-        // logic for if lands on 100
-        return int_space == 100;
-	}
-	
 	// check if player is over goal
 	static int CheckOverGoal(int int_space) {
 		if (int_space > 100) { // logic for if it goes over 100
@@ -99,10 +93,8 @@ public class SnakesAndLadders {
 				// play 1 turn
 				int_space = Turn(int_space);
 				
-				// check if player has won
-				if (CheckWin(int_space)) {
-					bool_play = false;
-				}
+				// checks if player has won
+				bool_play = 100 != int_space;
 				
 				// check if the player has gone over the goal
 				int_space = CheckOverGoal(int_space);
